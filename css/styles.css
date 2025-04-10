@@ -1,0 +1,756 @@
+/* 
+* Luxury Hotel & Resorts Stylesheet
+* Main Styles
+*/
+
+/* CSS Variables for Theming */
+:root {
+    /* Colors */
+    --primary-color: #1A4B84;
+    --secondary-color: #D4AF37;
+    --background-color: #FFFFFF;
+    --text-color: #333333;
+    --light-accent: #E8F1F8;
+    --error-color: #D32F2F;
+    --success-color: #2E7D32;
+    --light-gray: #F5F5F5;
+    --medium-gray: #E0E0E0;
+    --dark-gray: #757575;
+    
+    /* Typography */
+    --heading-font: 'Poppins', sans-serif;
+    --body-font: 'Open Sans', sans-serif;
+    
+    /* Spacing */
+    --space-xs: 8px;
+    --space-sm: 16px;
+    --space-md: 24px;
+    --space-lg: 32px;
+    --space-xl: 48px;
+    
+    /* Border Radius */
+    --border-radius: 8px;
+    
+    /* Box Shadow */
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --box-shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.15);
+    
+    /* Transitions */
+    --transition-speed: 0.3s;
+}
+
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--body-font);
+    color: var(--text-color);
+    line-height: 1.6;
+    background-color: var(--background-color);
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: all var(--transition-speed) ease;
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--heading-font);
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: var(--space-sm);
+    color: var(--primary-color);
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 2.25rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+h4 {
+    font-size: 1.25rem;
+}
+
+p {
+    margin-bottom: var(--space-md);
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+    position: relative;
+    padding-bottom: var(--space-sm);
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: var(--secondary-color);
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: var(--border-radius);
+    font-family: var(--heading-font);
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    border: none;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #15407a;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--box-shadow);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background-color: #c19f2e;
+    transform: translateY(-2px);
+    box-shadow: var(--box-shadow);
+}
+
+.btn-tertiary {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-tertiary:hover {
+    background-color: var(--light-accent);
+    transform: translateY(-2px);
+}
+
+.btn-search {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    width: 100%;
+    padding: 14px 24px;
+    font-weight: 600;
+}
+
+.btn-search:hover {
+    background-color: #c19f2e;
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: var(--space-md);
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+input, 
+select, 
+textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--border-radius);
+    font-family: var(--body-font);
+    font-size: 1rem;
+    transition: border-color var(--transition-speed) ease;
+}
+
+input:focus, 
+select:focus, 
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(26, 75, 132, 0.1);
+}
+
+input::placeholder, 
+textarea::placeholder {
+    color: var(--dark-gray);
+}
+
+.input-error {
+    border-color: var(--error-color);
+}
+
+.error-message {
+    color: var(--error-color);
+    font-size: 0.875rem;
+    margin-top: 4px;
+}
+
+/* Header */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: var(--background-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all var(--transition-speed) ease;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-sm) 0;
+}
+
+.logo a {
+    display: block;
+}
+
+.logo-svg {
+    height: 40px;
+}
+
+.main-nav ul {
+    display: flex;
+    align-items: center;
+}
+
+.main-nav li {
+    margin-left: var(--space-md);
+}
+
+.main-nav a {
+    color: var(--text-color);
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: var(--border-radius);
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    color: var(--primary-color);
+    background-color: var(--light-accent);
+}
+
+.btn-account {
+    background-color: var(--primary-color);
+    color: white !important;
+    padding: 8px 16px !important;
+    border-radius: var(--border-radius);
+}
+
+.btn-account:hover {
+    background-color: #15407a !important;
+}
+
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.mobile-menu-toggle span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background-color: var(--primary-color);
+    margin: 5px 0;
+    transition: all var(--transition-speed) ease;
+}
+
+/* Hero Section */
+.hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 180px 0 100px;
+    margin-bottom: var(--space-lg);
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero h1 {
+    color: white;
+    margin-bottom: var(--space-md);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.hero p {
+    font-size: 1.25rem;
+    margin-bottom: var(--space-lg);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Booking Widget */
+.booking-widget {
+    margin-top: -80px;
+    margin-bottom: var(--space-xl);
+    position: relative;
+    z-index: 10;
+}
+
+.booking-form {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: var(--space-lg);
+}
+
+.booking-form h2 {
+    text-align: center;
+    margin-bottom: var(--space-md);
+    font-size: 1.5rem;
+}
+
+#quick-booking-form {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: var(--space-md);
+}
+
+/* Featured Rooms */
+.featured-rooms {
+    padding: var(--space-xl) 0;
+}
+
+.room-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: var(--space-lg);
+}
+
+.room-card {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    background-color: white;
+}
+
+.room-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow-hover);
+}
+
+.room-image {
+    height: 220px;
+    overflow: hidden;
+}
+
+.room-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-speed) ease;
+}
+
+.room-card:hover .room-image img {
+    transform: scale(1.05);
+}
+
+.room-details {
+    padding: var(--space-md);
+}
+
+.room-description {
+    color: var(--dark-gray);
+    margin-bottom: var(--space-sm);
+    font-size: 0.95rem;
+}
+
+.room-features {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: var(--space-sm);
+}
+
+.room-features span {
+    margin-right: var(--space-sm);
+    margin-bottom: 8px;
+    font-size: 0.875rem;
+    color: var(--dark-gray);
+}
+
+.room-features i {
+    color: var(--secondary-color);
+    margin-right: 4px;
+}
+
+.room-price {
+    margin-bottom: var(--space-md);
+    font-size: 0.95rem;
+}
+
+.price {
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+/* Hotel Services */
+.hotel-services {
+    padding: var(--space-xl) 0;
+    background-color: var(--light-accent);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.service-card {
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: var(--space-lg);
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    transition: transform var(--transition-speed) ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+.service-icon {
+    margin-bottom: var(--space-sm);
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+}
+
+.service-card h3 {
+    margin-bottom: var(--space-sm);
+}
+
+.service-card p {
+    color: var(--dark-gray);
+    font-size: 0.95rem;
+    margin-bottom: 0;
+}
+
+.services-cta {
+    text-align: center;
+    margin-top: var(--space-lg);
+}
+
+/* Testimonials */
+.testimonials {
+    padding: var(--space-xl) 0;
+}
+
+.testimonial-slider {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto var(--space-lg);
+    overflow: hidden;
+}
+
+.testimonial-slide {
+    display: none;
+    opacity: 0;
+    transition: opacity var(--transition-speed) ease;
+}
+
+.testimonial-slide.active {
+    display: block;
+    opacity: 1;
+}
+
+.testimonial-content {
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: var(--space-lg);
+    box-shadow: var(--box-shadow);
+    text-align: center;
+}
+
+.rating {
+    color: var(--secondary-color);
+    font-size: 1.25rem;
+    margin-bottom: var(--space-sm);
+}
+
+.testimonial-text {
+    font-style: italic;
+    font-size: 1.125rem;
+    margin-bottom: var(--space-md);
+}
+
+.testimonial-author {
+    margin-top: var(--space-md);
+}
+
+.author-name {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 4px;
+}
+
+.author-title {
+    color: var(--dark-gray);
+    font-size: 0.875rem;
+    margin-bottom: 0;
+}
+
+.testimonial-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: var(--space-md);
+}
+
+.testimonial-controls button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    padding: 0 var(--space-sm);
+}
+
+.testimonial-indicators {
+    display: flex;
+    justify-content: center;
+    margin: 0 var(--space-md);
+}
+
+.indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--medium-gray);
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color var(--transition-speed) ease;
+}
+
+.indicator.active {
+    background-color: var(--primary-color);
+}
+
+.testimonials-cta {
+    text-align: center;
+}
+
+/* Newsletter */
+.newsletter {
+    background-color: var(--primary-color);
+    color: white;
+    padding: var(--space-xl) 0;
+}
+
+.newsletter-content {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.newsletter h2 {
+    color: white;
+    margin-bottom: var(--space-sm);
+}
+
+.newsletter p {
+    margin-bottom: var(--space-md);
+}
+
+.newsletter-form {
+    margin-bottom: var(--space-sm);
+}
+
+.newsletter-form .form-group {
+    display: flex;
+    margin-bottom: 0;
+}
+
+.newsletter-form input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border: none;
+}
+
+.newsletter-form button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    padding: 12px 24px;
+}
+
+.privacy-note {
+    font-size: 0.875rem;
+    opacity: 0.8;
+    margin-bottom: 0;
+}
+
+/* Footer */
+.site-footer {
+    background-color: #0a2540;
+    color: white;
+    padding: var(--space-xl) 0 var(--space-md);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: var(--space-lg);
+    margin-bottom: var(--space-lg);
+}
+
+.footer-column h3 {
+    color: white;
+    margin-bottom: var(--space-md);
+    position: relative;
+    padding-bottom: var(--space-xs);
+}
+
+.footer-column h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background-color: var(--secondary-color);
+}
+
+.footer-column ul li {
+    margin-bottom: 8px;
+}
+
+.footer-column ul li a {
+    color: rgba(255, 255, 255, 0.7);
+    transition: color var(--transition-speed) ease;
+}
+
+.footer-column ul li a:hover {
+    color: white;
+}
+
+.footer-column address {
+    font-style: normal;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-column address p {
+    margin-bottom: 4px;
+}
+
+.footer-column address a {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-column address a:hover {
+    color: white;
+}
+
+.social-media {
+    display: flex;
+    margin-top: var(--space-sm);
+}
+
+.social-media a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    margin-right: 10px;
+    transition: background-color var(--transition-speed) ease;
+}
+
+.social-media a:hover {
+    background-color: var(--secondary-color);
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--space-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.875rem;
+}
+
+.footer-links {
+    display: flex;
+}
+
+.footer-links li {
+    margin-left: var(--space-md);
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.footer-links a:hover {
+    color: white;
+}

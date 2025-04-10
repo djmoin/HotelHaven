@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account | Luxury Hotel & Resorts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <style>
+        /* Page-specific styles */
+        .account-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1519974719765-e6559eac2575?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 120px 0 60px;
+            margin-bottom: 0;
+        }
+        
+        .account-section {
+            padding: var(--space-xl) 0;
+        }
+        
+        .account-tabs {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-lg);
+            flex-wrap: wrap;
+        }
+        
+        .account-tab {
+            padding: 12px 24px;
+            background-color: var(--light-accent);
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            text-align: center;
+        }
+        
+        .account-tab:hover {
+            background-color: var(--light-accent);
+            color: var(--primary-color);
+        }
+        
+        .account-tab.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .account-tab i {
+            margin-right: 8px;
+        }
+        
+        .account-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .account-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+        
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--light-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+        
+        .profile-details h3 {
+            margin-bottom: 4px;
+        }
+        
+        .profile-details p {
+            color: var(--dark-gray);
+            margin-bottom: 0;
+        }
+        
+        .profile-form-group {
+            margin-bottom: var(--space-md);
+        }
+        
+        .profile-form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .profile-form-row {
+            display: flex;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+        
+        .profile-form-row .profile-form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        
+        .booking-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-bottom: var(--space-md);
+            overflow: hidden;
+            display: flex;
+            position: relative;
+        }
+        
+        .booking-card.cancelled {
+            opacity: 0.7;
+        }
+        
+        .booking-card.cancelled::after {
+            content: 'CANCELLED';
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background-color: var(--error-color);
+            color: white;
+            padding: 5px 40px;
+            font-size: 0.8rem;
+            transform: rotate(45deg);
+            font-weight: 600;
+        }
+        
+        .booking-image {
+            width: 200px;
+            height: auto;
+        }
+        
+        .booking-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .booking-details {
+            flex: 1;
+            padding: var(--space-md);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .booking-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .booking-header h3 {
+            margin-bottom: 0;
+        }
+        
+        .booking-status {
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        
+        .booking-status-confirmed {
+            background-color: #e3f5e6;
+            color: #2e7d32;
+        }
+        
+        .booking-status-pending {
+            background-color: #fff8e1;
+            color: #f57c00;
+        }
+        
+        .booking-status-cancelled {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+        
+        .booking-info {
+            margin-bottom: var(--space-md);
+            flex: 1;
+        }
+        
+        .booking-info p {
+            margin-bottom: 0;
+            line-height: 1.6;
+        }
+        
+        .booking-actions {
+            display: flex;
+            gap: var(--space-sm);
+        }
+        
+        .request-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-bottom: var(--space-md);
+            padding: var(--space-md);
+        }
+        
+        .request-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .request-header h3 {
+            margin-bottom: 0;
+        }
+        
+        .request-status {
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        
+        .request-status-pending {
+            background-color: #fff8e1;
+            color: #f57c00;
+        }
+        
+        .request-status-confirmed {
+            background-color: #e3f5e6;
+            color: #2e7d32;
+        }
+        
+        .request-status-completed {
+            background-color: #e8eaf6;
+            color: #3f51b5;
+        }
+        
+        .request-status-cancelled {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+        
+        .request-details {
+            margin-bottom: var(--space-sm);
+        }
+        
+        .request-info p {
+            margin-bottom: 4px;
+            line-height: 1.6;
+        }
+        
+        .request-notes {
+            background-color: var(--light-accent);
+            padding: var(--space-sm);
+            border-radius: var(--border-radius);
+            margin-top: var(--space-sm);
+        }
+        
+        .request-notes h4 {
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+        
+        .request-notes p {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+        }
+        
+        .request-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--space-sm);
+        }
+        
+        .no-bookings,
+        .no-requests {
+            text-align: center;
+            padding: var(--space-lg) 0;
+        }
+        
+        /* Modal styles for booking details */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1100;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity var(--transition-speed) ease;
+        }
+        
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transform: translateY(-20px);
+            transition: transform var(--transition-speed) ease;
+        }
+        
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            padding: var(--space-md);
+            border-bottom: 1px solid var(--medium-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h2 {
+            margin-bottom: 0;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark-gray);
+            transition: color var(--transition-speed) ease;
+        }
+        
+        .modal-close:hover {
+            color: var(--primary-color);
+        }
+        
+        .modal-body {
+            padding: var(--space-md);
+        }
+        
+        .booking-detail-header {
+            display: flex;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+        
+        .booking-detail-header .booking-image {
+            width: 200px;
+            height: 150px;
+            flex-shrink: 0;
+        }
+        
+        .booking-overview {
+            flex: 1;
+        }
+        
+        .booking-dates {
+            display: flex;
+            align-items: center;
+            margin: var(--space-sm) 0;
+        }
+        
+        .date-item {
+            text-align: center;
+        }
+        
+        .date-label {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--dark-gray);
+        }
+        
+        .date-value {
+            font-weight: 600;
+        }
+        
+        .date-separator {
+            width: 50px;
+            height: 1px;
+            background-color: var(--medium-gray);
+            margin: 0 var(--space-sm);
+        }
+        
+        .booking-detail-section {
+            margin-bottom: var(--space-md);
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid var(--medium-gray);
+        }
+        
+        .booking-detail-section:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+        
+        .booking-detail-section h4 {
+            margin-bottom: var(--space-sm);
+            color: var(--primary-color);
+        }
+        
+        .detail-item {
+            display: flex;
+            margin-bottom: 8px;
+        }
+        
+        .detail-label {
+            width: 130px;
+            font-weight: 600;
+        }
+        
+        .detail-value {
+            flex: 1;
+        }
+        
+        .special-requests {
+            background-color: var(--light-accent);
+            padding: var(--space-sm);
+            border-radius: var(--border-radius);
+            margin-top: 8px;
+            font-style: italic;
+        }
+        
+        .price-summary {
+            background-color: var(--light-accent);
+            padding: var(--space-sm);
+            border-radius: var(--border-radius);
+        }
+        
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .price-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .price-item.total {
+            margin-top: var(--space-sm);
+            padding-top: var(--space-sm);
+            border-top: 1px solid var(--medium-gray);
+            font-weight: 600;
+        }
+        
+        .booking-detail-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--space-sm);
+            margin-top: var(--space-md);
+        }
+        
+        /* Confirmation modal */
+        .confirmation-modal .modal-body {
+            text-align: center;
+        }
+        
+        .confirmation-message {
+            font-size: 1.1rem;
+            margin-bottom: var(--space-md);
+        }
+        
+        .booking-summary {
+            background-color: var(--light-accent);
+            padding: var(--space-sm);
+            border-radius: var(--border-radius);
+            margin-bottom: var(--space-md);
+            text-align: left;
+        }
+        
+        .cancellation-policy {
+            text-align: left;
+            margin-bottom: var(--space-md);
+        }
+        
+        .cancellation-policy h4 {
+            margin-bottom: var(--space-xs);
+            color: var(--primary-color);
+        }
+        
+        .cancellation-policy p {
+            margin-bottom: var(--space-xs);
+        }
+        
+        .modal-actions {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-md);
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 767.98px) {
+            .profile-form-row {
+                flex-direction: column;
+                gap: var(--space-sm);
+            }
+            
+            .booking-card {
+                flex-direction: column;
+            }
+            
+            .booking-image {
+                width: 100%;
+                height: 150px;
+            }
+            
+            .booking-detail-header {
+                flex-direction: column;
+            }
+            
+            .booking-detail-header .booking-image {
+                width: 100%;
+            }
+            
+            .detail-item {
+                flex-direction: column;
+            }
+            
+            .detail-label {
+                width: 100%;
+                margin-bottom: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="../index.html">
+                        <svg class="logo-svg" width="180" height="40" viewBox="0 0 180 40">
+                            <path d="M10,20 L40,20 L40,30 L10,30 Z" fill="#1A4B84"/>
+                            <path d="M45,15 L170,15 L170,25 L45,25 Z" fill="#D4AF37"/>
+                            <text x="50" y="22" font-family="Poppins" font-size="12" fill="#1A4B84">LUXURY HOTEL & RESORTS</text>
+                        </svg>
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="room-details.html">Rooms</a></li>
+                        <li><a href="booking.html">Bookings</a></li>
+                        <li><a href="concierge.html">Services</a></li>
+                        <li><a href="reviews.html">Reviews</a></li>
+                        <li><a href="account.html" class="active btn-account"><i class="fas fa-user"></i> Account</a></li>
+                    </ul>
+                </nav>
+                <button class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="account-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>My Account</h1>
+                <p>Manage your profile, bookings, and service requests</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="account-section">
+        <div class="container">
+            <div class="account-tabs">
+                <div class="account-tab active" data-tab="profile">
+                    <i class="fas fa-user"></i> Profile
+                </div>
+                <div class="account-tab" data-tab="bookings">
+                    <i class="fas fa-bed"></i> My Bookings
+                </div>
+                <div class="account-tab" data-tab="services">
+                    <i class="fas fa-concierge-bell"></i> Service Requests
+                </div>
+                <div class="account-tab" data-tab="billing">
+                    <i class="fas fa-file-invoice-dollar"></i> Billing
+                </div>
+            </div>
+            
+            <div class="account-content">
+                <!-- Profile Tab -->
+                <div id="profile-tab" class="tab-content active">
+                    <div class="account-card">
+                        <div class="profile-header">
+                            <div class="profile-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="profile-details">
+                                <h3>Guest Profile</h3>
+                                <p>Manage your personal information and preferences</p>
+                            </div>
+                        </div>
+                        
+                        <form id="profile-form">
+                            <div class="profile-form-row">
+                                <div class="profile-form-group">
+                                    <label for="profile-first-name">First Name</label>
+                                    <input type="text" id="profile-first-name" value="John" class="form-control">
+                                </div>
+                                <div class="profile-form-group">
+                                    <label for="profile-last-name">Last Name</label>
+                                    <input type="text" id="profile-last-name" value="Doe" class="form-control">
+                                </div>
+                            </div>
+                            
+                            <div class="profile-form-row">
+                                <div class="profile-form-group">
+                                    <label for="profile-email">Email Address</label>
+                                    <input type="email" id="profile-email" value="john.doe@example.com" class="form-control">
+                                </div>
+                                <div class="profile-form-group">
+                                    <label for="profile-phone">Phone Number</label>
+                                    <input type="tel" id="profile-phone" value="+1 (555) 123-4567" class="form-control">
+                                </div>
+                            </div>
+                            
+                            <div class="profile-form-row">
+                                <div class="profile-form-group">
+                                    <label for="profile-address">Address</label>
+                                    <input type="text" id="profile-address" value="123 Main Street" class="form-control">
+                                </div>
+                                <div class="profile-form-group">
+                                    <label for="profile-city">City</label>
+                                    <input type="text" id="profile-city" value="New York" class="form-control">
+                                </div>
+                            </div>
+                            
+                            <div class="profile-form-row">
+                                <div class="profile-form-group">
+                                    <label for="profile-state">State/Province</label>
+                                    <input type="text" id="profile-state" value="NY" class="form-control">
+                                </div>
+                                <div class="profile-form-group">
+                                    <label for="profile-zip">Zip/Postal Code</label>
+                                    <input type="text" id="profile-zip" value="10001" class="form-control">
+                                </div>
+                                <div class="profile-form-group">
+                                    <label for="profile-country">Country</label>
+                                    <input type="text" id="profile-country" value="United States" class="form-control">
+                                </div>
+                            </div>
+                            
+                            <div class="profile-form-group">
+                                <label for="profile-preferences">Special Preferences</label>
+                                <textarea id="profile-preferences" rows="3" class="form-control" placeholder="Any special preferences or requirements...">Non-smoking room, high floor with city view if possible.</textarea>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Bookings Tab -->
+                <div id="bookings-tab" class="tab-content">
+                    <div class="account-card" id="booking-management">
+                        <h2>My Bookings</h2>
+                        <p>View and manage your current and past reservations</p>
+                        
+                        <div id="user-bookings">
+                            <!-- Bookings will be populated by JavaScript -->
+                            <div class="loading">Loading your bookings...</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Services Tab -->
+                <div id="services-tab" class="tab-content">
+                    <div class="account-card">
+                        <h2>My Service Requests</h2>
+                        <p>Track the status of your concierge service requests</p>
+                        
+                        <div id="user-service-requests">
+                            <!-- Service requests will be populated by JavaScript -->
+                            <div class="loading">Loading your service requests...</div>
+                        </div>
+                        
+                        <div class="service-actions">
+                            <a href="concierge.html" class="btn btn-primary">Request New Service</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Billing Tab -->
+                <div id="billing-tab" class="tab-content">
+                    <div class="account-card">
+                        <h2>Billing & Payments</h2>
+                        <p>View your billing history and manage payment methods</p>
+                        
+                        <div class="payment-methods">
+                            <h3>Payment Methods</h3>
+                            <div class="payment-method-card">
+                                <div class="payment-method-icon">
+                                    <i class="fab fa-cc-visa"></i>
+                                </div>
+                                <div class="payment-method-details">
+                                    <h4>Visa ending in 4567</h4>
+                                    <p>Expires 12/2025</p>
+                                </div>
+                                <div class="payment-method-actions">
+                                    <span class="badge primary">Default</span>
+                                    <button class="btn-link">Edit</button>
+                                    <button class="btn-link">Remove</button>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-tertiary mt-3">Add Payment Method</button>
+                        </div>
+                        
+                        <div class="billing-history">
+                            <h3>Billing History</h3>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Description</th>
+                                            <th>Amount</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Jun 15, 2023</td>
+                                            <td>Room Charge - Deluxe King Room</td>
+                                            <td>$299.00</td>
+                                            <td><span class="badge success">Paid</span></td>
+                                            <td><button class="btn-link">View</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jun 14, 2023</td>
+                                            <td>Room Service - Dinner</td>
+                                            <td>$87.50</td>
+                                            <td><span class="badge success">Paid</span></td>
+                                            <td><button class="btn-link">View</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Apr 10, 2023</td>
+                                            <td>Room Charge - Executive Suite</td>
+                                            <td>$599.00</td>
+                                            <td><span class="badge success">Paid</span></td>
+                                            <td><button class="btn-link">View</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About Us</h3>
+                    <ul>
+                        <li><a href="#">Our Story</a></li>
+                        <li><a href="#">Awards & Recognition</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press Room</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Booking Information</h3>
+                    <ul>
+                        <li><a href="booking.html">Reservations</a></li>
+                        <li><a href="cancellation-policy.html">Cancellation Policy</a></li>
+                        <li><a href="group-booking.html">Group Bookings</a></li>
+                        <li><a href="#">Seasonal Offers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Guest Services</h3>
+                    <ul>
+                        <li><a href="concierge.html">Concierge</a></li>
+                        <li><a href="#">Dining Options</a></li>
+                        <li><a href="#">Spa & Wellness</a></li>
+                        <li><a href="#">Business Center</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <address>
+                        <p>1234 Luxury Avenue</p>
+                        <p>New York, NY 10001</p>
+                        <p>USA</p>
+                        <p><a href="tel:+12125551234">+1 (212) 555-1234</a></p>
+                        <p><a href="mailto:info@luxuryhotel.com">info@luxuryhotel.com</a></p>
+                    </address>
+                    <div class="social-media">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Luxury Hotel & Resorts. All rights reserved.</p>
+                <ul class="footer-links">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Accessibility</a></li>
+                    <li><a href="#">Site Map</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/database.js"></script>
+    <script src="../js/booking.js"></script>
+    <script src="../js/concierge.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize account page tabs
+            const tabs = document.querySelectorAll('.account-tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            // Check if there's a tab parameter in the URL
+            const urlParams = getUrlParams();
+            if (urlParams.view) {
+                // Find the tab with this data-tab attribute
+                const tabToActivate = document.querySelector(`.account-tab[data-tab="${urlParams.view}"]`);
+                if (tabToActivate) {
+                    // Deactivate all tabs
+                    tabs.forEach(tab => tab.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Activate the specified tab
+                    tabToActivate.classList.add('active');
+                    document.getElementById(`${urlParams.view}-tab`).classList.add('active');
+                }
+            }
+            
+            // Add click event listeners to tabs
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs and content
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding content
+                    this.classList.add('active');
+                    const tabName = this.getAttribute('data-tab');
+                    document.getElementById(`${tabName}-tab`).classList.add('active');
+                    
+                    // Update URL without refreshing the page
+                    const newUrl = `${window.location.pathname}?view=${tabName}`;
+                    history.pushState({}, '', newUrl);
+                });
+            });
+            
+            // Handle profile form submission
+            const profileForm = document.getElementById('profile-form');
+            if (profileForm) {
+                profileForm.addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    
+                    // Show success message
+                    showFormMessage(profileForm, 'Profile updated successfully!', 'success');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

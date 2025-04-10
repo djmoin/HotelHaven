@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concierge Services | Luxury Hotel & Resorts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <style>
+        /* Page-specific styles */
+        .concierge-page-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1596436889106-be35e843f974?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 120px 0 60px;
+            margin-bottom: 0;
+        }
+        
+        .service-categories-section {
+            background-color: var(--light-accent);
+            padding: var(--space-lg) 0;
+        }
+        
+        .service-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .category-tab {
+            padding: 12px 24px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            color: var(--text-color);
+            cursor: pointer;
+            border: 1px solid var(--medium-gray);
+            transition: all var(--transition-speed) ease;
+        }
+        
+        .category-tab:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .category-tab.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            display: flex;
+            flex-direction: column;
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-hover);
+        }
+        
+        .service-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-speed) ease;
+        }
+        
+        .service-card:hover .service-image img {
+            transform: scale(1.05);
+        }
+        
+        .service-details {
+            padding: var(--space-md);
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        
+        .service-details h3 {
+            margin-bottom: var(--space-xs);
+        }
+        
+        .service-description {
+            color: var(--dark-gray);
+            margin-bottom: var(--space-md);
+            font-size: 0.95rem;
+        }
+        
+        .service-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--space-md);
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+        }
+        
+        .service-meta i {
+            color: var(--secondary-color);
+            margin-right: 4px;
+        }
+        
+        .service-request-section {
+            padding: var(--space-xl) 0;
+        }
+        
+        .service-request-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: var(--space-lg);
+        }
+        
+        .form-row {
+            display: flex;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        
+        .service-category-section {
+            margin-top: var(--space-xl);
+        }
+        
+        .category-title {
+            margin-bottom: var(--space-md);
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: var(--space-xs);
+        }
+        
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        /* Modal styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1100;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity var(--transition-speed) ease;
+        }
+        
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transform: translateY(-20px);
+            transition: transform var(--transition-speed) ease;
+        }
+        
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            padding: var(--space-md);
+            border-bottom: 1px solid var(--medium-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h2 {
+            margin-bottom: 0;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark-gray);
+            transition: color var(--transition-speed) ease;
+        }
+        
+        .modal-close:hover {
+            color: var(--primary-color);
+        }
+        
+        .modal-body {
+            padding: var(--space-md);
+        }
+        
+        .service-details-header {
+            display: flex;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+        
+        .service-details-header .service-image {
+            width: 200px;
+            height: 150px;
+            flex-shrink: 0;
+        }
+        
+        .service-overview {
+            flex: 1;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 991.98px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: var(--space-sm);
+            }
+            
+            .service-details-header {
+                flex-direction: column;
+            }
+            
+            .service-details-header .service-image {
+                width: 100%;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="../index.html">
+                        <svg class="logo-svg" width="180" height="40" viewBox="0 0 180 40">
+                            <path d="M10,20 L40,20 L40,30 L10,30 Z" fill="#1A4B84"/>
+                            <path d="M45,15 L170,15 L170,25 L45,25 Z" fill="#D4AF37"/>
+                            <text x="50" y="22" font-family="Poppins" font-size="12" fill="#1A4B84">LUXURY HOTEL & RESORTS</text>
+                        </svg>
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="room-details.html">Rooms</a></li>
+                        <li><a href="booking.html">Bookings</a></li>
+                        <li><a href="concierge.html" class="active">Services</a></li>
+                        <li><a href="reviews.html">Reviews</a></li>
+                        <li><a href="account.html" class="btn-account"><i class="fas fa-user"></i> Account</a></li>
+                    </ul>
+                </nav>
+                <button class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="concierge-page-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Concierge Services</h1>
+                <p>Personalized assistance to enhance your stay experience</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="service-categories-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Explore Our Services</h2>
+                <p class="section-subtitle">Our dedicated team is ready to fulfill your every request</p>
+            </div>
+            <div id="service-categories" class="service-categories">
+                <div class="category-tab active" data-category="all">All Services</div>
+                <div class="category-tab" data-category="dining">Dining</div>
+                <div class="category-tab" data-category="wellness">Wellness</div>
+                <div class="category-tab" data-category="transportation">Transportation</div>
+                <div class="category-tab" data-category="business">Business</div>
+                <div class="category-tab" data-category="special">Special Requests</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-list-section">
+        <div class="container">
+            <div id="services-container">
+                <!-- Services will be populated by JavaScript -->
+                <div class="loading">Loading services...</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="service-request-section">
+        <div class="container">
+            <div class="service-request-form">
+                <h2>Request a Service</h2>
+                <p>Please fill in the form below to request a service from our concierge team.</p>
+                
+                <form id="service-request-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="request-booking">Select Your Booking</label>
+                            <select id="request-booking" required>
+                                <option value="">Select a booking</option>
+                                <!-- Booking options will be populated by JavaScript -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="request-service">Select a Service</label>
+                            <select id="request-service" required>
+                                <option value="">Select a service</option>
+                                <!-- Service options will be populated by JavaScript -->
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="request-date">Requested Date</label>
+                            <input type="date" id="request-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="request-time">Preferred Time (Optional)</label>
+                            <input type="time" id="request-time">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="request-notes">Special Instructions (Optional)</label>
+                        <textarea id="request-notes" rows="4" placeholder="Any specific requirements or preferences..."></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Submit Request</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="concierge-benefits">
+        <div class="container">
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>24/7 Availability</h3>
+                    <p>Our concierge team is available around the clock to assist with any requests.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>Personalized Service</h3>
+                    <p>Tailored recommendations and services based on your preferences.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>Local Knowledge</h3>
+                    <p>Expert insights on local attractions, dining, and entertainment options.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Special Occasions</h3>
+                    <p>Let us help you celebrate birthdays, anniversaries, and other special moments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About Us</h3>
+                    <ul>
+                        <li><a href="#">Our Story</a></li>
+                        <li><a href="#">Awards & Recognition</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press Room</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Booking Information</h3>
+                    <ul>
+                        <li><a href="booking.html">Reservations</a></li>
+                        <li><a href="cancellation-policy.html">Cancellation Policy</a></li>
+                        <li><a href="group-booking.html">Group Bookings</a></li>
+                        <li><a href="#">Seasonal Offers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Guest Services</h3>
+                    <ul>
+                        <li><a href="concierge.html">Concierge</a></li>
+                        <li><a href="#">Dining Options</a></li>
+                        <li><a href="#">Spa & Wellness</a></li>
+                        <li><a href="#">Business Center</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <address>
+                        <p>1234 Luxury Avenue</p>
+                        <p>New York, NY 10001</p>
+                        <p>USA</p>
+                        <p><a href="tel:+12125551234">+1 (212) 555-1234</a></p>
+                        <p><a href="mailto:info@luxuryhotel.com">info@luxuryhotel.com</a></p>
+                    </address>
+                    <div class="social-media">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Luxury Hotel & Resorts. All rights reserved.</p>
+                <ul class="footer-links">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Accessibility</a></li>
+                    <li><a href="#">Site Map</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/database.js"></script>
+    <script src="../js/concierge.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load services for the select dropdown
+            loadServicesForSelect();
+            
+            // Set up date constraints for request form
+            const requestDateInput = document.getElementById('request-date');
+            if (requestDateInput) {
+                // Set minimum date to today
+                const today = new Date();
+                requestDateInput.min = formatDateForInput(today);
+                requestDateInput.value = formatDateForInput(today);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest Reviews | Luxury Hotel & Resorts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <style>
+        /* Page-specific styles */
+        .reviews-page-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 120px 0 60px;
+            margin-bottom: 0;
+        }
+        
+        .reviews-overview {
+            background-color: var(--light-accent);
+            padding: var(--space-xl) 0;
+        }
+        
+        .reviews-summary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xl);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .average-rating {
+            text-align: center;
+            padding: var(--space-md);
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            width: 200px;
+        }
+        
+        .average-rating-value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            line-height: 1;
+            margin-bottom: var(--space-xs);
+        }
+        
+        .star-rating {
+            color: var(--secondary-color);
+            font-size: 1.25rem;
+            margin-bottom: var(--space-xs);
+        }
+        
+        .total-reviews {
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+        
+        .rating-distribution {
+            width: 400px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: var(--space-md);
+        }
+        
+        .rating-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .rating-label {
+            width: 80px;
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+        }
+        
+        .rating-progress {
+            flex: 1;
+            height: 10px;
+            background-color: var(--medium-gray);
+            border-radius: 5px;
+            margin: 0 var(--space-sm);
+            overflow: hidden;
+        }
+        
+        .rating-progress-bar {
+            height: 100%;
+            background-color: var(--secondary-color);
+        }
+        
+        .rating-count {
+            width: 30px;
+            text-align: right;
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+        }
+        
+        .reviews-filters {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+        
+        .filter-form {
+            display: flex;
+            gap: var(--space-md);
+            align-items: flex-end;
+        }
+        
+        .filter-form .form-group {
+            margin-bottom: 0;
+            flex: 1;
+        }
+        
+        .filter-form .filter-actions {
+            display: flex;
+            gap: var(--space-sm);
+        }
+        
+        .reviews-list {
+            padding: var(--space-xl) 0;
+        }
+        
+        .review-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+        
+        .review-header {
+            margin-bottom: var(--space-md);
+        }
+        
+        .review-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .review-title {
+            margin-bottom: 0;
+            flex: 1;
+        }
+        
+        .review-info {
+            display: flex;
+            gap: var(--space-md);
+        }
+        
+        .reviewer {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+        
+        .reviewer-avatar {
+            font-size: 2rem;
+            color: var(--dark-gray);
+        }
+        
+        .reviewer-name {
+            font-weight: 600;
+        }
+        
+        .review-details {
+            display: flex;
+            flex-direction: column;
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+        }
+        
+        .review-content p {
+            margin-bottom: 0;
+        }
+        
+        .write-review-section {
+            background-color: var(--light-accent);
+            padding: var(--space-xl) 0;
+        }
+        
+        .review-form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: var(--space-lg);
+        }
+        
+        .rating-select {
+            display: flex;
+            gap: 8px;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .rating-select .star {
+            font-size: 2rem;
+            color: var(--medium-gray);
+            cursor: pointer;
+            transition: color var(--transition-speed) ease;
+        }
+        
+        .rating-select .star.hover,
+        .rating-select .star.selected {
+            color: var(--secondary-color);
+        }
+        
+        .review-form-row {
+            display: flex;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+        
+        .review-form-row .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        
+        .no-reviews {
+            text-align: center;
+            padding: var(--space-xl) 0;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 991.98px) {
+            .reviews-summary {
+                flex-direction: column;
+                gap: var(--space-md);
+            }
+            
+            .average-rating,
+            .rating-distribution {
+                width: 100%;
+                max-width: 500px;
+            }
+            
+            .filter-form {
+                flex-wrap: wrap;
+                gap: var(--space-sm);
+            }
+            
+            .filter-form .form-group {
+                min-width: 200px;
+            }
+            
+            .review-info {
+                flex-direction: column;
+                gap: var(--space-sm);
+            }
+            
+            .review-form-row {
+                flex-direction: column;
+                gap: var(--space-sm);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="../index.html">
+                        <svg class="logo-svg" width="180" height="40" viewBox="0 0 180 40">
+                            <path d="M10,20 L40,20 L40,30 L10,30 Z" fill="#1A4B84"/>
+                            <path d="M45,15 L170,15 L170,25 L45,25 Z" fill="#D4AF37"/>
+                            <text x="50" y="22" font-family="Poppins" font-size="12" fill="#1A4B84">LUXURY HOTEL & RESORTS</text>
+                        </svg>
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="room-details.html">Rooms</a></li>
+                        <li><a href="booking.html">Bookings</a></li>
+                        <li><a href="concierge.html">Services</a></li>
+                        <li><a href="reviews.html" class="active">Reviews</a></li>
+                        <li><a href="account.html" class="btn-account"><i class="fas fa-user"></i> Account</a></li>
+                    </ul>
+                </nav>
+                <button class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="reviews-page-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Guest Reviews</h1>
+                <p>Read what our guests have to say about their experience</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="reviews-overview">
+        <div class="container">
+            <div class="reviews-summary">
+                <div class="average-rating" id="average-rating">
+                    <!-- Average rating will be populated by JavaScript -->
+                </div>
+                <div class="rating-distribution" id="rating-distribution">
+                    <!-- Rating distribution will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="reviews-filters">
+                <form id="review-filters" class="filter-form">
+                    <div class="form-group">
+                        <label for="filter-rating">Filter by Rating</label>
+                        <select id="filter-rating" name="rating">
+                            <option value="all">All Ratings</option>
+                            <option value="5">5 Stars</option>
+                            <option value="4">4 Stars</option>
+                            <option value="3">3 Stars</option>
+                            <option value="2">2 Stars</option>
+                            <option value="1">1 Star</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="filter-trip-type">Trip Type</label>
+                        <select id="filter-trip-type" name="trip-type">
+                            <option value="all">All Trip Types</option>
+                            <option value="Business">Business</option>
+                            <option value="Couple">Couple</option>
+                            <option value="Family">Family</option>
+                            <option value="Friends">Friends</option>
+                            <option value="Solo">Solo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="filter-sort">Sort By</label>
+                        <select id="filter-sort" name="sort">
+                            <option value="date-desc">Most Recent</option>
+                            <option value="date-asc">Oldest First</option>
+                            <option value="rating-desc">Highest Rating</option>
+                            <option value="rating-asc">Lowest Rating</option>
+                        </select>
+                    </div>
+                    <div class="filter-actions">
+                        <button type="button" id="reset-filters" class="btn btn-tertiary">Reset</button>
+                        <button type="submit" class="btn btn-secondary">Apply Filters</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="reviews-list">
+        <div class="container">
+            <div id="reviews-container">
+                <!-- Reviews will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <section class="write-review-section" id="write-review">
+        <div class="container">
+            <div class="review-form-container">
+                <h2>Share Your Experience</h2>
+                <form id="review-form" class="review-form">
+                    <div class="form-group">
+                        <label for="review-rating">Your Rating</label>
+                        <div class="rating-select">
+                            <i class="fas fa-star star" data-value="1"></i>
+                            <i class="fas fa-star star" data-value="2"></i>
+                            <i class="fas fa-star star" data-value="3"></i>
+                            <i class="fas fa-star star" data-value="4"></i>
+                            <i class="fas fa-star star" data-value="5"></i>
+                        </div>
+                        <input type="hidden" id="review-rating" name="rating" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="review-title">Review Title</label>
+                        <input type="text" id="review-title" name="title" placeholder="Summarize your stay or highlight an important detail" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="review-comment">Your Review</label>
+                        <textarea id="review-comment" name="comment" rows="5" placeholder="Tell us about your stay, the room, amenities, service, etc." required></textarea>
+                    </div>
+                    
+                    <div class="review-form-row">
+                        <div class="form-group">
+                            <label for="review-name">Your Name</label>
+                            <input type="text" id="review-name" name="name" placeholder="Your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="review-email">Email Address</label>
+                            <input type="email" id="review-email" name="email" placeholder="Your email (not publicly displayed)" required>
+                        </div>
+                    </div>
+                    
+                    <div class="review-form-row">
+                        <div class="form-group">
+                            <label for="review-stay-date">When did you stay?</label>
+                            <input type="date" id="review-stay-date" name="stay-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="review-trip-type">Trip Type</label>
+                            <select id="review-trip-type" name="trip-type" required>
+                                <option value="">Select trip type</option>
+                                <option value="Business">Business</option>
+                                <option value="Couple">Couple</option>
+                                <option value="Family">Family</option>
+                                <option value="Friends">Friends</option>
+                                <option value="Solo">Solo</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="consent-checkbox">
+                            <input type="checkbox" id="review-consent" name="consent" required>
+                            <label for="review-consent">I confirm this is an honest review based on my own experience and that I have no personal or business affiliation with this property.</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Submit Review</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About Us</h3>
+                    <ul>
+                        <li><a href="#">Our Story</a></li>
+                        <li><a href="#">Awards & Recognition</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press Room</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Booking Information</h3>
+                    <ul>
+                        <li><a href="booking.html">Reservations</a></li>
+                        <li><a href="cancellation-policy.html">Cancellation Policy</a></li>
+                        <li><a href="#">Group Bookings</a></li>
+                        <li><a href="#">Seasonal Offers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Guest Services</h3>
+                    <ul>
+                        <li><a href="concierge.html">Concierge</a></li>
+                        <li><a href="#">Dining Options</a></li>
+                        <li><a href="#">Spa & Wellness</a></li>
+                        <li><a href="#">Business Center</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <address>
+                        <p>1234 Luxury Avenue</p>
+                        <p>New York, NY 10001</p>
+                        <p>USA</p>
+                        <p><a href="tel:+12125551234">+1 (212) 555-1234</a></p>
+                        <p><a href="mailto:info@luxuryhotel.com">info@luxuryhotel.com</a></p>
+                    </address>
+                    <div class="social-media">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Luxury Hotel & Resorts. All rights reserved.</p>
+                <ul class="footer-links">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Accessibility</a></li>
+                    <li><a href="#">Site Map</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/database.js"></script>
+    <script src="../js/reviews.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set max date for stay date to today
+            const stayDateInput = document.getElementById('review-stay-date');
+            if (stayDateInput) {
+                const today = new Date();
+                stayDateInput.max = formatDateForInput(today);
+                
+                // Set default value to a week ago
+                const weekAgo = new Date(today);
+                weekAgo.setDate(today.getDate() - 7);
+                stayDateInput.value = formatDateForInput(weekAgo);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Hotel & Resorts | Book Your Stay</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <svg class="logo-svg" width="180" height="40" viewBox="0 0 180 40">
+                            <path d="M10,20 L40,20 L40,30 L10,30 Z" fill="#1A4B84"/>
+                            <path d="M45,15 L170,15 L170,25 L45,25 Z" fill="#D4AF37"/>
+                            <text x="50" y="22" font-family="Poppins" font-size="12" fill="#1A4B84">LUXURY HOTEL & RESORTS</text>
+                        </svg>
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html" class="active">Home</a></li>
+                        <li><a href="pages/room-details.html">Rooms</a></li>
+                        <li><a href="pages/booking.html">Bookings</a></li>
+                        <li><a href="pages/concierge.html">Services</a></li>
+                        <li><a href="pages/reviews.html">Reviews</a></li>
+                        <li><a href="pages/account.html" class="btn-account"><i class="fas fa-user"></i> Account</a></li>
+                    </ul>
+                </nav>
+                <button class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Experience Luxury Like Never Before</h1>
+                <p>Discover the perfect blend of comfort, elegance, and exceptional service</p>
+                <a href="pages/booking.html" class="btn btn-primary">Book Now</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="booking-widget">
+        <div class="container">
+            <div class="booking-form">
+                <h2>Find Your Perfect Stay</h2>
+                <form id="quick-booking-form">
+                    <div class="form-group">
+                        <label for="check-in">Check-in</label>
+                        <input type="date" id="check-in" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="check-out">Check-out</label>
+                        <input type="date" id="check-out" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="guests">Guests</label>
+                        <select id="guests" required>
+                            <option value="1">1 Adult</option>
+                            <option value="2" selected>2 Adults</option>
+                            <option value="3">3 Adults</option>
+                            <option value="4">4 Adults</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="rooms">Rooms</label>
+                        <select id="rooms" required>
+                            <option value="1" selected>1 Room</option>
+                            <option value="2">2 Rooms</option>
+                            <option value="3">3 Rooms</option>
+                            <option value="4">4 Rooms</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-search">Search Availability</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-rooms">
+        <div class="container">
+            <h2 class="section-title">Featured Accommodations</h2>
+            <div class="room-cards">
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Deluxe King Room">
+                    </div>
+                    <div class="room-details">
+                        <h3>Deluxe King Room</h3>
+                        <p class="room-description">Spacious room with king-sized bed, city view, and luxurious amenities</p>
+                        <div class="room-features">
+                            <span><i class="fas fa-wifi"></i> Free WiFi</span>
+                            <span><i class="fas fa-coffee"></i> Breakfast</span>
+                            <span><i class="fas fa-bath"></i> Bathtub</span>
+                        </div>
+                        <div class="room-price">
+                            <span class="price">$299</span> per night
+                        </div>
+                        <a href="pages/room-details.html?id=1" class="btn btn-secondary">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Executive Suite">
+                    </div>
+                    <div class="room-details">
+                        <h3>Executive Suite</h3>
+                        <p class="room-description">Luxury suite with separate living area, premium amenities, and panoramic views</p>
+                        <div class="room-features">
+                            <span><i class="fas fa-wifi"></i> Free WiFi</span>
+                            <span><i class="fas fa-coffee"></i> Breakfast</span>
+                            <span><i class="fas fa-glass-martini-alt"></i> Mini Bar</span>
+                        </div>
+                        <div class="room-price">
+                            <span class="price">$499</span> per night
+                        </div>
+                        <a href="pages/room-details.html?id=2" class="btn btn-secondary">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Family Suite">
+                    </div>
+                    <div class="room-details">
+                        <h3>Family Suite</h3>
+                        <p class="room-description">Spacious suite with two bedrooms, perfect for families with children</p>
+                        <div class="room-features">
+                            <span><i class="fas fa-wifi"></i> Free WiFi</span>
+                            <span><i class="fas fa-coffee"></i> Breakfast</span>
+                            <span><i class="fas fa-tv"></i> 2 TVs</span>
+                        </div>
+                        <div class="room-price">
+                            <span class="price">$599</span> per night
+                        </div>
+                        <a href="pages/room-details.html?id=3" class="btn btn-secondary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hotel-services">
+        <div class="container">
+            <h2 class="section-title">Exclusive Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Fine Dining</h3>
+                    <p>Experience culinary excellence at our award-winning restaurants</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3>Spa & Wellness</h3>
+                    <p>Rejuvenate your body and mind with our premium spa treatments</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-concierge-bell"></i>
+                    </div>
+                    <h3>Concierge</h3>
+                    <p>Our staff is available 24/7 to fulfill your every request</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3>Airport Shuttle</h3>
+                    <p>Complimentary airport transfers for a seamless travel experience</p>
+                </div>
+            </div>
+            <div class="services-cta">
+                <a href="pages/concierge.html" class="btn btn-tertiary">Explore All Services</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Guest Experiences</h2>
+            <div class="testimonial-slider" id="testimonial-slider">
+                <div class="testimonial-slide active">
+                    <div class="testimonial-content">
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"An absolutely wonderful experience from start to finish. The staff was attentive, the room was immaculate, and the amenities were top-notch. Will definitely be returning."</p>
+                        <div class="testimonial-author">
+                            <p class="author-name">James Wilson</p>
+                            <p class="author-title">Executive Stay, May 2023</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-slide">
+                    <div class="testimonial-content">
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"Our family vacation was perfect thanks to the amazing accommodations and kid-friendly amenities. The concierge helped plan wonderful daily activities for us."</p>
+                        <div class="testimonial-author">
+                            <p class="author-name">Sarah Thompson</p>
+                            <p class="author-title">Family Suite, June 2023</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-slide">
+                    <div class="testimonial-content">
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="testimonial-text">"The spa services were exceptional! I've never felt more relaxed and pampered. The wellness packages are worth every penny."</p>
+                        <div class="testimonial-author">
+                            <p class="author-name">Emily Rodriguez</p>
+                            <p class="author-title">Wellness Retreat, April 2023</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-controls">
+                <button id="prev-testimonial" aria-label="Previous testimonial">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="testimonial-indicators">
+                    <span class="indicator active"></span>
+                    <span class="indicator"></span>
+                    <span class="indicator"></span>
+                </div>
+                <button id="next-testimonial" aria-label="Next testimonial">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="testimonials-cta">
+                <a href="pages/reviews.html" class="btn btn-tertiary">View All Reviews</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Subscribe for Exclusive Offers</h2>
+                <p>Join our mailing list and be the first to know about special rates and packages</p>
+                <form id="newsletter-form" class="newsletter-form">
+                    <div class="form-group">
+                        <input type="email" id="newsletter-email" placeholder="Your email address" required>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </div>
+                </form>
+                <p class="privacy-note">We respect your privacy. Unsubscribe at any time.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About Us</h3>
+                    <ul>
+                        <li><a href="#">Our Story</a></li>
+                        <li><a href="#">Awards & Recognition</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press Room</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Booking Information</h3>
+                    <ul>
+                        <li><a href="pages/booking.html">Reservations</a></li>
+                        <li><a href="pages/cancellation-policy.html">Cancellation Policy</a></li>
+                        <li><a href="#">Group Bookings</a></li>
+                        <li><a href="#">Seasonal Offers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Guest Services</h3>
+                    <ul>
+                        <li><a href="pages/concierge.html">Concierge</a></li>
+                        <li><a href="#">Dining Options</a></li>
+                        <li><a href="#">Spa & Wellness</a></li>
+                        <li><a href="#">Business Center</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <address>
+                        <p>1234 Luxury Avenue</p>
+                        <p>New York, NY 10001</p>
+                        <p>USA</p>
+                        <p><a href="tel:+12125551234">+1 (212) 555-1234</a></p>
+                        <p><a href="mailto:info@luxuryhotel.com">info@luxuryhotel.com</a></p>
+                    </address>
+                    <div class="social-media">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Luxury Hotel & Resorts. All rights reserved.</p>
+                <ul class="footer-links">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Accessibility</a></li>
+                    <li><a href="#">Site Map</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/utils.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

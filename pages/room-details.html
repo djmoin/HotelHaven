@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Details | Luxury Hotel & Resorts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <style>
+        /* Page-specific styles */
+        .room-gallery {
+            position: relative;
+            height: 500px;
+            margin-top: 80px;
+        }
+        
+        .gallery-main {
+            height: 100%;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+        }
+        
+        .gallery-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-speed) ease;
+        }
+        
+        .gallery-thumbnails {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: var(--border-radius);
+        }
+        
+        .gallery-thumbnail {
+            width: 80px;
+            height: 60px;
+            cursor: pointer;
+            border-radius: 4px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            transition: border-color var(--transition-speed) ease;
+        }
+        
+        .gallery-thumbnail.active {
+            border-color: var(--secondary-color);
+        }
+        
+        .gallery-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            pointer-events: none;
+        }
+        
+        .gallery-nav button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            pointer-events: auto;
+            transition: background-color var(--transition-speed) ease;
+        }
+        
+        .gallery-nav button:hover {
+            background-color: white;
+        }
+        
+        .room-details-container {
+            display: flex;
+            gap: var(--space-xl);
+            padding: var(--space-xl) 0;
+        }
+        
+        .room-info {
+            flex: 2;
+        }
+        
+        .room-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-md);
+        }
+        
+        .room-title h1 {
+            margin-bottom: var(--space-xs);
+        }
+        
+        .room-price {
+            text-align: right;
+        }
+        
+        .price-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .price-text {
+            color: var(--dark-gray);
+        }
+        
+        .room-description {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .room-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--light-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            margin-right: var(--space-sm);
+        }
+        
+        .amenities-list {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .amenities-list h2 {
+            margin-bottom: var(--space-sm);
+        }
+        
+        .amenities-list ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+        
+        .amenities-list ul li {
+            position: relative;
+            padding-left: 24px;
+        }
+        
+        .amenities-list ul li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0;
+        }
+        
+        .room-policies {
+            background-color: var(--light-accent);
+            padding: var(--space-md);
+            border-radius: var(--border-radius);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .room-policies h2 {
+            margin-bottom: var(--space-sm);
+        }
+        
+        .policy-item {
+            display: flex;
+            margin-bottom: 8px;
+        }
+        
+        .policy-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .policy-label {
+            width: 150px;
+            font-weight: 600;
+        }
+        
+        .booking-sidebar {
+            flex: 1;
+            position: sticky;
+            top: 100px;
+            align-self: flex-start;
+        }
+        
+        .booking-widget {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .booking-widget h2 {
+            margin-bottom: var(--space-md);
+        }
+        
+        .room-reviews {
+            padding: var(--space-xl) 0;
+            background-color: var(--light-accent);
+        }
+        
+        .room-reviews .container {
+            max-width: 900px;
+        }
+        
+        .reviews-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-md);
+        }
+        
+        .reviews-header h2 {
+            margin-bottom: 0;
+        }
+        
+        .related-rooms {
+            padding: var(--space-xl) 0;
+        }
+        
+        .related-rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-lg);
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 991.98px) {
+            .room-details-container {
+                flex-direction: column;
+            }
+            
+            .booking-sidebar {
+                position: static;
+                margin-bottom: var(--space-lg);
+            }
+            
+            .room-features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .amenities-list ul {
+                grid-template-columns: 1fr;
+            }
+            
+            .related-rooms-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 767.98px) {
+            .room-gallery {
+                height: 350px;
+            }
+            
+            .room-header {
+                flex-direction: column;
+            }
+            
+            .room-price {
+                text-align: left;
+                margin-top: var(--space-sm);
+            }
+            
+            .room-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .related-rooms-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="../index.html">
+                        <svg class="logo-svg" width="180" height="40" viewBox="0 0 180 40">
+                            <path d="M10,20 L40,20 L40,30 L10,30 Z" fill="#1A4B84"/>
+                            <path d="M45,15 L170,15 L170,25 L45,25 Z" fill="#D4AF37"/>
+                            <text x="50" y="22" font-family="Poppins" font-size="12" fill="#1A4B84">LUXURY HOTEL & RESORTS</text>
+                        </svg>
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="room-details.html" class="active">Rooms</a></li>
+                        <li><a href="booking.html">Bookings</a></li>
+                        <li><a href="concierge.html">Services</a></li>
+                        <li><a href="reviews.html">Reviews</a></li>
+                        <li><a href="account.html" class="btn-account"><i class="fas fa-user"></i> Account</a></li>
+                    </ul>
+                </nav>
+                <button class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="room-gallery" id="room-gallery">
+        <div class="gallery-main">
+            <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Room view" id="gallery-main-image">
+        </div>
+        <div class="gallery-thumbnails" id="gallery-thumbnails">
+            <!-- Thumbnails will be populated by JavaScript -->
+        </div>
+        <div class="gallery-nav">
+            <button id="gallery-prev" aria-label="Previous image">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button id="gallery-next" aria-label="Next image">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </section>
+
+    <section class="room-details">
+        <div class="container">
+            <div class="room-details-container">
+                <div class="room-info">
+                    <div class="room-header">
+                        <div class="room-title">
+                            <h1 id="room-name">Deluxe King Room</h1>
+                            <div class="room-meta">
+                                <span id="room-size">400 sq ft</span> • 
+                                <span id="room-capacity">Max 2 guests</span> • 
+                                <span id="room-bed">King Bed</span>
+                            </div>
+                        </div>
+                        <div class="room-price">
+                            <div class="price-value" id="room-price">$299</div>
+                            <div class="price-text">per night</div>
+                        </div>
+                    </div>
+                    
+                    <div class="room-description" id="room-description">
+                        <p>Indulge in luxury with our Deluxe King Room. This spacious accommodation features a plush king-sized bed, stunning city views, and elegant decor. The room is equipped with a marble bathroom, walk-in shower, soaking tub, and premium bath products. Enjoy modern amenities including a 55-inch smart TV, high-speed Wi-Fi, in-room safe, and a fully stocked minibar. Perfect for couples or business travelers seeking comfort and style.</p>
+                    </div>
+                    
+                    <div class="room-features" id="room-features">
+                        <!-- Features will be populated by JavaScript -->
+                    </div>
+                    
+                    <div class="amenities-list">
+                        <h2>Room Amenities</h2>
+                        <ul id="room-amenities">
+                            <!-- Amenities will be populated by JavaScript -->
+                        </ul>
+                    </div>
+                    
+                    <div class="room-policies">
+                        <h2>Room Policies</h2>
+                        <div class="policy-item">
+                            <div class="policy-label">Check-in</div>
+                            <div class="policy-value">From 3:00 PM</div>
+                        </div>
+                        <div class="policy-item">
+                            <div class="policy-label">Check-out</div>
+                            <div class="policy-value">Until 12:00 PM</div>
+                        </div>
+                        <div class="policy-item">
+                            <div class="policy-label">Cancellation</div>
+                            <div class="policy-value">Free cancellation up to 48 hours before check-in</div>
+                        </div>
+                        <div class="policy-item">
+                            <div class="policy-label">Smoking</div>
+                            <div class="policy-value">Non-smoking room</div>
+                        </div>
+                        <div class="policy-item">
+                            <div class="policy-label">Children</div>
+                            <div class="policy-value">Children of all ages are welcome</div>
+                        </div>
+                        <div class="policy-item">
+                            <div class="policy-label">Pets</div>
+                            <div class="policy-value">Pets are not allowed</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="booking-sidebar">
+                    <div class="booking-widget">
+                        <h2>Book This Room</h2>
+                        <form id="room-booking-form">
+                            <div id="booking-room-details">
+                                <!-- Room details will be populated by JavaScript -->
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="booking-check-in">Check-in Date</label>
+                                <input type="date" id="booking-check-in" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="booking-check-out">Check-out Date</label>
+                                <input type="date" id="booking-check-out" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="booking-guests">Number of Guests</label>
+                                <select id="booking-guests" required>
+                                    <option value="1">1 Adult</option>
+                                    <option value="2" selected>2 Adults</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="booking-first-name">First Name</label>
+                                <input type="text" id="booking-first-name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="booking-last-name">Last Name</label>
+                                <input type="text" id="booking-last-name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="booking-email">Email Address</label>
+                                <input type="email" id="booking-email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="booking-phone">Phone Number</label>
+                                <input type="tel" id="booking-phone" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="booking-special-requests">Special Requests (Optional)</label>
+                                <textarea id="booking-special-requests" rows="3" placeholder="Any specific requirements or preferences..."></textarea>
+                            </div>
+                            
+                            <div id="booking-summary" class="booking-summary">
+                                <!-- Booking summary will be populated by JavaScript -->
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Book Now</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="call-to-action">
+                        <p>Need help with your reservation?</p>
+                        <p><a href="tel:+12125551234"><i class="fas fa-phone"></i> +1 (212) 555-1234</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="room-reviews">
+        <div class="container">
+            <div class="reviews-header">
+                <h2>Guest Reviews</h2>
+                <a href="reviews.html#write-review" class="btn btn-secondary">Write a Review</a>
+            </div>
+            
+            <div id="reviews-container">
+                <!-- Reviews will be populated by JavaScript -->
+                <div class="loading">Loading reviews...</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="related-rooms">
+        <div class="container">
+            <h2 class="section-title">You May Also Like</h2>
+            <div class="related-rooms-grid" id="related-rooms">
+                <!-- Related rooms will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About Us</h3>
+                    <ul>
+                        <li><a href="#">Our Story</a></li>
+                        <li><a href="#">Awards & Recognition</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press Room</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Booking Information</h3>
+                    <ul>
+                        <li><a href="booking.html">Reservations</a></li>
+                        <li><a href="cancellation-policy.html">Cancellation Policy</a></li>
+                        <li><a href="group-booking.html">Group Bookings</a></li>
+                        <li><a href="#">Seasonal Offers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Guest Services</h3>
+                    <ul>
+                        <li><a href="concierge.html">Concierge</a></li>
+                        <li><a href="#">Dining Options</a></li>
+                        <li><a href="#">Spa & Wellness</a></li>
+                        <li><a href="#">Business Center</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <address>
+                        <p>1234 Luxury Avenue</p>
+                        <p>New York, NY 10001</p>
+                        <p>USA</p>
+                        <p><a href="tel:+12125551234">+1 (212) 555-1234</a></p>
+                        <p><a href="mailto:info@luxuryhotel.com">info@luxuryhotel.com</a></p>
+                    </address>
+                    <div class="social-media">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Luxury Hotel & Resorts. All rights reserved.</p>
+                <ul class="footer-links">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Accessibility</a></li>
+                    <li><a href="#">Site Map</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/database.js"></script>
+    <script src="../js/booking.js"></script>
+    <script src="../js/reviews.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get room ID from URL parameter
+            const urlParams = getUrlParams();
+            const roomId = urlParams.id || '1'; // Default to room 1 if no ID provided
+            
+            // Get room details from database
+            const room = db.getRoomById(roomId);
+            if (!room) {
+                // Redirect to rooms page if room not found
+                window.location.href = 'booking.html';
+                return;
+            }
+            
+            // Update page title
+            document.title = `${room.name} | Luxury Hotel & Resorts`;
+            
+            // Populate room details
+            document.getElementById('room-name').textContent = room.name;
+            document.getElementById('room-size').textContent = room.size;
+            document.getElementById('room-capacity').textContent = `Max ${room.capacity} guests`;
+            document.getElementById('room-bed').textContent = room.bedType;
+            document.getElementById('room-price').textContent = `$${room.price}`;
+            document.getElementById('room-description').innerHTML = `<p>${room.longDescription}</p>`;
+            
+            // Populate room features
+            const featuresContainer = document.getElementById('room-features');
+            featuresContainer.innerHTML = '';
+            
+            room.features.forEach(feature => {
+                const featureElement = document.createElement('div');
+                featureElement.className = 'feature-item';
+                featureElement.innerHTML = `
+                    <div class="feature-icon">
+                        <i class="fas fa-${feature.icon}"></i>
+                    </div>
+                    <div class="feature-text">${feature.name}</div>
+                `;
+                featuresContainer.appendChild(featureElement);
+            });
+            
+            // Populate room amenities
+            const amenitiesList = document.getElementById('room-amenities');
+            amenitiesList.innerHTML = '';
+            
+            room.amenities.forEach(amenity => {
+                const amenityItem = document.createElement('li');
+                amenityItem.textContent = amenity;
+                amenitiesList.appendChild(amenityItem);
+            });
+            
+            // Set up gallery
+            const galleryMainImage = document.getElementById('gallery-main-image');
+            const galleryThumbnails = document.getElementById('gallery-thumbnails');
+            const galleryPrev = document.getElementById('gallery-prev');
+            const galleryNext = document.getElementById('gallery-next');
+            
+            // Set main image
+            galleryMainImage.src = room.gallery[0];
+            
+            // Create thumbnails
+            room.gallery.forEach((image, index) => {
+                const thumbnail = document.createElement('div');
+                thumbnail.className = `gallery-thumbnail ${index === 0 ? 'active' : ''}`;
+                thumbnail.innerHTML = `<img src="${image}" alt="Room view ${index + 1}">`;
+                
+                thumbnail.addEventListener('click', function() {
+                    galleryMainImage.src = image;
+                    document.querySelectorAll('.gallery-thumbnail').forEach(thumb => thumb.classList.remove('active'));
+                    this.classList.add('active');
+                });
+                
+                galleryThumbnails.appendChild(thumbnail);
+            });
+            
+            // Gallery navigation
+            let currentIndex = 0;
+            
+            galleryPrev.addEventListener('click', function() {
+                currentIndex = (currentIndex - 1 + room.gallery.length) % room.gallery.length;
+                galleryMainImage.src = room.gallery[currentIndex];
+                
+                document.querySelectorAll('.gallery-thumbnail').forEach((thumb, idx) => {
+                    thumb.classList.toggle('active', idx === currentIndex);
+                });
+            });
+            
+            galleryNext.addEventListener('click', function() {
+                currentIndex = (currentIndex + 1) % room.gallery.length;
+                galleryMainImage.src = room.gallery[currentIndex];
+                
+                document.querySelectorAll('.gallery-thumbnail').forEach((thumb, idx) => {
+                    thumb.classList.toggle('active', idx === currentIndex);
+                });
+            });
+            
+            // Set up booking form
+            const checkInInput = document.getElementById('booking-check-in');
+            const checkOutInput = document.getElementById('booking-check-out');
+            
+            // Set date constraints
+            setupDateConstraints(checkInInput, checkOutInput);
+            
+            // Update guests select based on room capacity
+            const guestsSelect = document.getElementById('booking-guests');
+            guestsSelect.innerHTML = '';
+            
+            for (let i = 1; i <= room.capacity; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = `${i} ${i === 1 ? 'Adult' : 'Adults'}`;
+                option.selected = i === 2; // Default to 2 adults
+                guestsSelect.appendChild(option);
+            }
+            
+            // Pre-fill form with URL parameters if available
+            if (urlParams.checkIn) {
+                checkInInput.value = urlParams.checkIn;
+            }
+            
+            if (urlParams.checkOut) {
+                checkOutInput.value = urlParams.checkOut;
+            }
+            
+            if (urlParams.guests) {
+                guestsSelect.value = urlParams.guests;
+            }
+            
+            // Load related rooms
+            const relatedRoomsContainer = document.getElementById('related-rooms');
+            const allRooms = db.getAllRooms();
+            
+            // Filter out current room and limit to 3 rooms
+            const relatedRooms = allRooms
+                .filter(r => r.id !== roomId)
+                .slice(0, 3);
+            
+            // Populate related rooms
+            relatedRoomsContainer.innerHTML = '';
+            
+            relatedRooms.forEach(relatedRoom => {
+                const roomCard = document.createElement('div');
+                roomCard.className = 'room-card';
+                roomCard.innerHTML = `
+                    <div class="room-image">
+                        <img src="${relatedRoom.image}" alt="${relatedRoom.name}">
+                    </div>
+                    <div class="room-details">
+                        <h3>${relatedRoom.name}</h3>
+                        <p class="room-description">${relatedRoom.description}</p>
+                        <div class="room-features">
+                            ${relatedRoom.features.slice(0, 3).map(feature => `<span><i class="fas fa-${feature.icon}"></i> ${feature.name}</span>`).join('')}
+                        </div>
+                        <div class="room-price">
+                            <span class="price">$${relatedRoom.price}</span> per night
+                        </div>
+                        <a href="room-details.html?id=${relatedRoom.id}" class="btn btn-secondary">View Details</a>
+                    </div>
+                `;
+                
+                relatedRoomsContainer.appendChild(roomCard);
+            });
+        });
+    </script>
+</body>
+</html>

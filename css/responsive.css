@@ -1,0 +1,206 @@
+/* 
+* Luxury Hotel & Resorts Stylesheet
+* Responsive Styles
+*/
+
+/* Medium devices (tablets, less than 992px) */
+@media (max-width: 991.98px) {
+    /* Typography */
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    h2 {
+        font-size: 2rem;
+    }
+    
+    /* Header */
+    .main-nav ul {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--background-color);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        flex-direction: column;
+        padding: var(--space-md) 0;
+    }
+    
+    .main-nav.active ul {
+        display: flex;
+    }
+    
+    .main-nav li {
+        margin: 0;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .main-nav a {
+        display: block;
+        padding: var(--space-sm) var(--space-md);
+    }
+    
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
+    /* Booking Widget */
+    #quick-booking-form {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    /* Featured Rooms */
+    .room-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Hotel Services */
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Footer */
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-links {
+        margin-top: var(--space-sm);
+        justify-content: center;
+    }
+    
+    .footer-links li:first-child {
+        margin-left: 0;
+    }
+}
+
+/* Small devices (landscape phones, less than 768px) */
+@media (max-width: 767.98px) {
+    /* Typography */
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.75rem;
+    }
+    
+    /* Hero Section */
+    .hero {
+        padding: 160px 0 80px;
+    }
+    
+    /* Booking Widget */
+    .booking-widget {
+        margin-top: -50px;
+    }
+    
+    #quick-booking-form {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Featured Rooms */
+    .room-cards {
+        grid-template-columns: 1fr;
+        grid-gap: var(--space-md);
+    }
+    
+    /* Newsletter */
+    .newsletter-form .form-group {
+        flex-direction: column;
+    }
+    
+    .newsletter-form input {
+        border-radius: var(--border-radius);
+        margin-bottom: var(--space-sm);
+    }
+    
+    .newsletter-form button {
+        border-radius: var(--border-radius);
+        width: 100%;
+    }
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+    /* Typography */
+    h1 {
+        font-size: 1.75rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    h3 {
+        font-size: 1.25rem;
+    }
+    
+    /* Services Grid */
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Footer */
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Landscape orientation for mobile devices */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero {
+        padding: 120px 0 60px;
+    }
+    
+    .booking-widget {
+        margin-top: -30px;
+    }
+}
+
+/* Print styles */
+@media print {
+    .site-header,
+    .hero,
+    .booking-widget,
+    .newsletter,
+    .site-footer {
+        display: none;
+    }
+    
+    .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+    }
+    
+    body {
+        font-size: 12pt;
+        line-height: 1.5;
+        color: #000;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid;
+        page-break-inside: avoid;
+    }
+    
+    img {
+        max-width: 100% !important;
+        page-break-inside: avoid;
+    }
+    
+    .room-card,
+    .service-card {
+        page-break-inside: avoid;
+        box-shadow: none !important;
+        border: 1px solid #ccc;
+    }
+}

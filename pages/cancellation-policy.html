@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancellation Policy | Luxury Hotel & Resorts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <style>
+        /* Page-specific styles */
+        .policy-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1545175707-9eec1209f720?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 120px 0 60px;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .policy-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding-bottom: var(--space-xl);
+        }
+        
+        .policy-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .policy-card h2 {
+            margin-bottom: var(--space-sm);
+            color: var(--primary-color);
+        }
+        
+        .policy-card p {
+            margin-bottom: var(--space-md);
+        }
+        
+        .policy-card ul {
+            margin-bottom: var(--space-md);
+            padding-left: var(--space-md);
+        }
+        
+        .policy-card ul li {
+            margin-bottom: var(--space-xs);
+        }
+        
+        .policy-accordion {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .policy-heading {
+            background-color: var(--light-accent);
+            padding: var(--space-md);
+            border-radius: var(--border-radius);
+            margin-bottom: var(--space-sm);
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color var(--transition-speed) ease;
+        }
+        
+        .policy-heading:hover {
+            background-color: #dbe7f2;
+        }
+        
+        .policy-heading.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .policy-heading::after {
+            content: '\f078';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            transition: transform var(--transition-speed) ease;
+        }
+        
+        .policy-heading.active::after {
+            transform: rotate(180deg);
+        }
+        
+        .policy-content {
+            padding: 0 var(--space-md);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-speed) ease;
+        }
+        
+        .policy-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: var(--space-md);
+        }
+        
+        .policy-table th,
+        .policy-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+        
+        .policy-table th {
+            background-color: var(--light-accent);
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .policy-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .policy-table .fee-type {
+            font-weight: 600;
+        }
+        
+        .policy-highlight {
+            background-color: var(--light-accent);
+            border-left: 4px solid var(--primary-color);
+            padding: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+        
+        .policy-highlight h3 {
+            margin-bottom: var(--space-xs);
+            color: var(--primary-color);
+        }
+        
+        .policy-cta {
+            text-align: center;
+            margin-top: var(--space-xl);
+        }
+        
+        .policy-cta p {
+            margin-bottom: var(--space-md);
+            font-size: 1.1rem;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 767.98px) {
+            .policy-table {
+                font-size: 0.9rem;
+            }
+            
+            .policy-table th,
+            .policy-table td {
+                padding: 8px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="../index.html">
+                        <svg class="logo-svg" width="180" height="40" viewBox="0 0 180 40">
+                            <path d="M10,20 L40,20 L40,30 L10,30 Z" fill="#1A4B84"/>
+                            <path d="M45,15 L170,15 L170,25 L45,25 Z" fill="#D4AF37"/>
+                            <text x="50" y="22" font-family="Poppins" font-size="12" fill="#1A4B84">LUXURY HOTEL & RESORTS</text>
+                        </svg>
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="room-details.html">Rooms</a></li>
+                        <li><a href="booking.html">Bookings</a></li>
+                        <li><a href="concierge.html">Services</a></li>
+                        <li><a href="reviews.html">Reviews</a></li>
+                        <li><a href="account.html" class="btn-account"><i class="fas fa-user"></i> Account</a></li>
+                    </ul>
+                </nav>
+                <button class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="policy-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Cancellation Policy</h1>
+                <p>Our terms and conditions for reservation modifications and cancellations</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cancellation-policy">
+        <div class="container">
+            <div class="policy-container">
+                <div class="policy-card">
+                    <h2>Our Flexible Cancellation Policy</h2>
+                    <p>At Luxury Hotel & Resorts, we understand that plans can change. We strive to offer flexible booking conditions to accommodate your needs. Our standard cancellation policy allows for free cancellation up to 48 hours before your scheduled check-in time. We believe this provides our guests with the peace of mind they deserve when planning their stay with us.</p>
+                    
+                    <div class="policy-highlight">
+                        <h3>Key Benefits</h3>
+                        <ul>
+                            <li>Free cancellation up to 48 hours before check-in</li>
+                            <li>No prepayment required - pay at the property</li>
+                            <li>Ability to modify your reservation dates (subject to availability)</li>
+                            <li>Transparent pricing with no hidden fees</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div id="cancellation-policy" class="policy-accordion">
+                    <div class="policy-heading">Standard Room Reservations</div>
+                    <div class="policy-content">
+                        <table class="policy-table">
+                            <thead>
+                                <tr>
+                                    <th>Cancellation Period</th>
+                                    <th>Cancellation Fee</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>More than 48 hours before check-in</td>
+                                    <td>No charge (full refund)</td>
+                                </tr>
+                                <tr>
+                                    <td>Less than 48 hours before check-in</td>
+                                    <td>First night's room rate</td>
+                                </tr>
+                                <tr>
+                                    <td>No-show</td>
+                                    <td>Full stay amount</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <p>For standard room reservations, cancellations made more than 48 hours prior to the scheduled arrival date will receive a full refund. Cancellations made less than 48 hours before check-in will incur a fee equivalent to one night's stay. In the event of a no-show, the full amount of the stay will be charged.</p>
+                        
+                        <p>Any modification to existing reservations is subject to availability and potential rate changes. If the original booking was made under a promotional rate, that rate may no longer be available for the new dates.</p>
+                    </div>
+                    
+                    <div class="policy-heading">Suite Reservations</div>
+                    <div class="policy-content">
+                        <table class="policy-table">
+                            <thead>
+                                <tr>
+                                    <th>Cancellation Period</th>
+                                    <th>Cancellation Fee</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>More than 72 hours before check-in</td>
+                                    <td>No charge (full refund)</td>
+                                </tr>
+                                <tr>
+                                    <td>Between 72 and 48 hours before check-in</td>
+                                    <td>25% of total stay</td>
+                                </tr>
+                                <tr>
+                                    <td>Less than 48 hours before check-in</td>
+                                    <td>First night's room rate</td>
+                                </tr>
+                                <tr>
+                                    <td>No-show</td>
+                                    <td>Full stay amount</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <p>Due to high demand for our suites, a slightly stricter cancellation policy applies. Cancellations made more than 72 hours prior to arrival will receive a full refund. Cancellations between 72 and 48 hours will incur a fee of 25% of the total stay. Cancellations less than 48 hours before check-in will be charged for the first night, and no-shows will be charged the full stay amount.</p>
+                    </div>
+                    
+                    <div class="policy-heading">Group Bookings (5+ Rooms)</div>
+                    <div class="policy-content">
+                        <table class="policy-table">
+                            <thead>
+                                <tr>
+                                    <th>Cancellation Period</th>
+                                    <th>Cancellation Fee</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>More than 14 days before check-in</td>
+                                    <td>No charge (full refund of deposit)</td>
+                                </tr>
+                                <tr>
+                                    <td>7-14 days before check-in</td>
+                                    <td>25% of total group booking value</td>
+                                </tr>
+                                <tr>
+                                    <td>3-7 days before check-in</td>
+                                    <td>50% of total group booking value</td>
+                                </tr>
+                                <tr>
+                                    <td>Less than 3 days before check-in</td>
+                                    <td>100% of total group booking value</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <p>Group bookings have special terms due to the significant space allocation required. A 25% deposit is required at the time of booking to secure the reservation. This deposit is fully refundable if cancelled more than 14 days before arrival. For cancellations between 7-14 days, a fee of 25% of the total booking value applies. Cancellations between 3-7 days incur a 50% fee, and less than 3 days results in full payment being due.</p>
+                        
+                        <p>Individual room cancellations within a group booking may be subject to these same terms if they significantly impact the overall group size or contracted room block.</p>
+                    </div>
+                    
+                    <div class="policy-heading">Non-Refundable Rates</div>
+                    <div class="policy-content">
+                        <p>For reservations made under our special non-refundable rates, the full payment is required at the time of booking, and no refunds will be issued in case of cancellation, modification, or no-show. These rates are typically offered at a significant discount compared to our standard flexible rates.</p>
+                        
+                        <p>By selecting a non-refundable rate, you acknowledge and agree that the booking cannot be canceled, modified, or refunded for any reason. We recommend choosing this option only if you are certain about your travel plans.</p>
+                        
+                        <div class="policy-highlight">
+                            <h3>Important Note</h3>
+                            <p>Non-refundable bookings are clearly marked during the reservation process. Please review your rate details carefully before confirming your reservation.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="policy-heading">Special Events & Holiday Periods</div>
+                    <div class="policy-content">
+                        <p>During special event periods, holidays, and peak seasons, modified cancellation policies may apply. For reservations made during these periods, the full payment may be required at the time of booking, and stricter cancellation terms may be in effect.</p>
+                        
+                        <p>These special cancellation terms will be clearly communicated during the booking process and in your confirmation email. Typically, for bookings during special event periods:</p>
+                        
+                        <ul>
+                            <li>100% non-refundable deposit required at time of booking</li>
+                            <li>No cancellations or modifications allowed</li>
+                            <li>Minimum stay requirements may apply</li>
+                        </ul>
+                        
+                        <p>Special event periods include, but are not limited to: New Year's Eve, Valentine's Day, major local festivals, conventions, and other high-demand periods specific to our location.</p>
+                    </div>
+                    
+                    <div class="policy-heading">Force Majeure & Extraordinary Circumstances</div>
+                    <div class="policy-content">
+                        <p>In the event of force majeure or extraordinary circumstances beyond your control (such as flight cancellations due to severe weather, natural disasters, government travel restrictions, or serious illness/injury requiring hospitalization), we may, at our discretion, offer more flexible cancellation terms.</p>
+                        
+                        <p>In such cases, please contact our reservations team as soon as possible with appropriate documentation (such as airline notifications, doctor's notes, etc.) to request a special consideration of your circumstances.</p>
+                        
+                        <p>While we will make every effort to accommodate genuine emergencies, we reserve the right to evaluate each situation on a case-by-case basis.</p>
+                    </div>
+                </div>
+                
+                <div class="policy-card">
+                    <h2>How to Cancel or Modify Your Reservation</h2>
+                    <p>You can cancel or modify your reservation through any of the following methods:</p>
+                    
+                    <ul>
+                        <li><strong>Online:</strong> Log into your account on our website and manage your booking under "My Bookings"</li>
+                        <li><strong>Email:</strong> Send a request to <a href="mailto:reservations@luxuryhotel.com">reservations@luxuryhotel.com</a> with your booking reference number</li>
+                        <li><strong>Phone:</strong> Call our reservations team at <a href="tel:+12125551234">+1 (212) 555-1234</a> (available 24/7)</li>
+                    </ul>
+                    
+                    <p>When cancelling or modifying your reservation, please have your booking reference number ready. Any refunds due will be processed within 7-10 business days using the same payment method used for the original booking.</p>
+                </div>
+                
+                <div class="policy-cta">
+                    <p>Have questions about our cancellation policy?</p>
+                    <a href="tel:+12125551234" class="btn btn-primary"><i class="fas fa-phone"></i> Contact Our Reservations Team</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About Us</h3>
+                    <ul>
+                        <li><a href="#">Our Story</a></li>
+                        <li><a href="#">Awards & Recognition</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press Room</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Booking Information</h3>
+                    <ul>
+                        <li><a href="booking.html">Reservations</a></li>
+                        <li><a href="cancellation-policy.html">Cancellation Policy</a></li>
+                        <li><a href="group-booking.html">Group Bookings</a></li>
+                        <li><a href="#">Seasonal Offers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Guest Services</h3>
+                    <ul>
+                        <li><a href="concierge.html">Concierge</a></li>
+                        <li><a href="#">Dining Options</a></li>
+                        <li><a href="#">Spa & Wellness</a></li>
+                        <li><a href="#">Business Center</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <address>
+                        <p>1234 Luxury Avenue</p>
+                        <p>New York, NY 10001</p>
+                        <p>USA</p>
+                        <p><a href="tel:+12125551234">+1 (212) 555-1234</a></p>
+                        <p><a href="mailto:info@luxuryhotel.com">info@luxuryhotel.com</a></p>
+                    </address>
+                    <div class="social-media">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Luxury Hotel & Resorts. All rights reserved.</p>
+                <ul class="footer-links">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Accessibility</a></li>
+                    <li><a href="#">Site Map</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/booking.js"></script>
+</body>
+</html>
